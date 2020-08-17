@@ -1,0 +1,48 @@
+/*
+  Q = 4
+Queries = 1 2 2 2 1 4
+Output: 2 -1
+Explanation: In the second testcase 
+1 2 the queue will be {2}
+2   poped element will be 2 and 
+    then the queue will be empty
+2   the queue is empty and hence -1
+1 4 the queue will be {4}.
+
+*/
+
+
+void StackQueue :: push(int x)
+ {
+        // Your Code
+        if(s1.empty())
+            s1.push(x);
+        else{
+            while(s1.empty()==false)
+            {
+                s2.push(s1.top());
+                s1.pop();
+            }
+            s1.push(x);
+            while(s2.empty()==false)
+            {
+                s1.push(s2.top());
+                s2.pop();
+            }
+        }
+ }
+
+/*The method pop which return the element poped out of the queue*/
+int StackQueue :: pop()
+{
+        // Your Code 
+        int x;
+        if(s1.empty())
+            x=-1;
+        else{
+             x=s1.top();
+            s1.pop();    
+        }
+        
+        return x;
+}
