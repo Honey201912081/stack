@@ -1,0 +1,59 @@
+#include <iostream>
+#include<stack>
+#include<algorithm>
+using namespace std;
+long int getMaxArea(int hist[],int n)
+{
+    stack<int> s;
+    long int max_area = 0;
+    long int tp , area_top;
+    long int i=0;
+    while(i<n)
+    {
+        if(s.empty()||hist[s.top()]<=hist[i])
+        {
+            s.push(i++);
+        }
+        else
+        {
+            tp= s.top();
+            s.pop();
+            area_top= hist[tp]*(s.empty()?i:i-s.top()-1);
+            if(max_area<area_top)
+            {
+                max_area=area_top;
+            }
+        }
+    }
+    while(s.empty()==false)
+    {
+        tp= s.top();
+            s.pop();
+            area_top= hist[tp]*(s.empty()?i:i-s.top()-1);
+            if(max_area<area_top)
+            {
+                max_area=area_top;
+            }
+    }
+    return max_area;
+}
+int main()
+ {
+	//code
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    long int n;
+	    cin>>n;
+	    int arr[n];
+	    for(int i=0;i<n;i++)
+	    {
+	        cin>>arr[i];
+	    }
+	    long int area;
+	    area = getMaxArea(arr,n);
+	    cout<<area<<endl;
+	}
+	return 0;
+}
